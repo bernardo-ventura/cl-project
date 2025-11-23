@@ -187,11 +187,10 @@ $RECYCLE.BIN/
 # data/processed_texts/*.txt
 
 # Specific to your project - large data files
-# These files are typically too large for Git and should be ignored
-data/processed_texts/
+# Keep processed texts and chunks but ignore raw PDFs
+data/raw_pdfs/*.pdf
 data/samples/
-data/raw_pdfs/
-*.pdf
 
-# Ignore large text files in data directories but keep important config files
-data/**/*.txt
+# Ignore large original text files but keep chunks
+data/processed_texts/*.txt
+!data/processed_texts/chunks/
