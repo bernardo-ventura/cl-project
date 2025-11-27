@@ -1,0 +1,36 @@
+{
+  "verification_time": "2025-11-26T16:44:57.644616",
+  "total_files": 4,
+  "files_found": 0,
+  "total_size_mb": 12.700000000000001,
+  "files": [
+    {
+      "file": "extracted_entities.pkl",
+      "size_mb": 2.9,
+      "modified": "2025-11-23T18:34:29.188816",
+      "status": "ERROR: No module named 'knowledge_graph'",
+      "description": "Entidades brutas extra\u00eddas pelo spaCy"
+    },
+    {
+      "file": "normalized_entities.pkl",
+      "size_mb": 0.7,
+      "modified": "2025-11-23T23:10:08.223391",
+      "status": "ERROR: No module named 'knowledge_graph'",
+      "description": "Entidades normalizadas pelo LLM"
+    },
+    {
+      "file": "extracted_relations.pkl",
+      "size_mb": 0.3,
+      "modified": "2025-11-26T09:17:51.144977",
+      "status": "ERROR: No module named 'knowledge_graph'",
+      "description": "Rela\u00e7\u00f5es extra\u00eddas pelo LLM"
+    },
+    {
+      "file": "processed_chunks.pkl",
+      "size_mb": 8.8,
+      "modified": "2025-11-23T18:10:13.859820",
+      "status": "ERROR: Can't get attribute 'TextChunk' on <module '__main__' from '/home/beventura/UC/cl-project/verify_data_backup.py'>",
+      "description": "Chunks de texto estruturados"
+    }
+  ]
+}

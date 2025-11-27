@@ -16,18 +16,31 @@ Cl-project/
 ├── README.md                    # Este arquivo
 ├── requirements.txt             # Dependências Python
 ├── src/
-│   ├── preprocessing/          # Módulo de preprocessamento
+│   ├── preprocessing/          # ✅ Módulo de preprocessamento (COMPLETO)
 │   │   ├── extract_sample.py   # Extração de amostras (teste)
 │   │   ├── extract_full.py     # Extração completa ✅
-│   │   └── chunking.py         # Divisão em chunks (atual)
-│   ├── knowledge_graph/        # Módulo KG (Fase 2)
-│   ├── rag/                    # Módulo RAG (Fase 3)
+│   │   └── chunking.py         # Divisão em chunks ✅
+│   ├── knowledge_graph/        # ✅ Módulo KG (COMPLETO)
+│   │   ├── chunk_loader.py     # Carregamento de chunks ✅
+│   │   ├── entity_extractor.py # Extração de entidades ✅
+│   │   ├── entity_normalizer.py # Normalização LLM ✅
+│   │   ├── relation_extractor.py # Extração de relações ✅
+│   │   ├── kg_constructor.py   # Construção RDF ✅
+│   │   ├── entities.py         # Classes de entidades ✅
+│   │   ├── relations.py        # Classes de relações ✅
+│   │   └── execute_*.py        # Scripts de execução ✅
+│   ├── rag/                    # ⏳ Módulo RAG (PRÓXIMO)
 │   └── experiments/            # Experimentos comparativos (Fase 4)
 ├── data/
 │   ├── raw_pdfs/              # 8 PDFs originais
 │   ├── samples/               # Amostras de teste
-│   └── processed_texts/       # Textos completos ✅
-       └── chunks/             # Chunks divididos ✅
+│   ├── processed_texts/       # Textos completos ✅
+│   │   └── chunks/            # Chunks divididos ✅
+│   ├── *.pkl                  # Dados intermediários ✅
+│   ├── ml_kg.turtle           # Knowledge Graph principal ✅
+│   ├── ml_kg.xml              # KG formato XML ✅
+│   ├── ml_kg.json-ld          # KG formato JSON-LD ✅
+│   └── kg_construction_report.txt # Relatório final ✅
 ```
 
 ## Fases do Projeto
@@ -37,7 +50,8 @@ Cl-project/
 - ✅ **Chunking**: Divisão inteligente por sentenças (~350 palavras) - **Concluído** (chunking.py)
 - ⏸️ **Limpeza**: Normalização de texto e caracteres - Planejado (Não é essencial, pular por enquanto)
 
-### Fase 2: Knowledge Graphs - Pipeline Híbrido (spaCy + Local LLM)
+### Fase 2: Knowledge Graphs ✅ CONCLUÍDO
+**Pipeline Híbrido (spaCy + Ollama LLM) - FINALIZADO**
 
 **📋 Pipeline de Construção do Knowledge Graph:**
 
@@ -68,28 +82,31 @@ Cl-project/
    - ✅ Classificar cada entidade (algoritmo, modelo, conceito, técnica, métrica, etc.)
    - ✅ **Resultado**: 44.183 → 5.993 entidades (86.4% redução, 795 calls LLM)
 
-**5. 🔗 Extração de Relações (LLM)**
-   - Para cada chunk:
-     - Passar texto + lista de entidades canônicas
-     - Extrair relações entre entidades
-     - Usar esquema controlado (is_a, part_of, used_for, optimizes, depends_on...)
-   - Deduplicar relações entre chunks
+**5. ✅ Extração de Relações (LLM)**
+   - ✅ Para cada chunk: passar texto + lista de entidades canônicas
+   - ✅ Extrair relações entre entidades usando esquema controlado
+   - ✅ Esquema: is_a, part_of, uses, implements, optimizes, depends_on, etc.
+   - ✅ **Concluído**: 2.747 chunks → **3.056 relações extraídas**
 
-**6. 🕸️ Construção do Knowledge Graph (RDF)**
-   - Criar grafo RDF usando rdflib
-   - Criar namespace para conceitos de ML
-   - Converter entidades em nós
-   - Converter relações em triplas RDF
-   - Serializar para `ml_kg.ttl`
+**6. ✅ Construção do Knowledge Graph (RDF)**
+   - ✅ Criar grafo RDF usando rdflib
+   - ✅ Criar namespace para conceitos de ML
+   - ✅ Converter entidades em nós
+   - ✅ Converter relações em triplas RDF
+   - ✅ Serializar para múltiplos formatos
 
 **📤 Saída Final:**
-- `ml_kg.ttl` (Knowledge Graph em formato Turtle)
-- Visualizações opcionais ou consultas SPARQL para validação
+- ✅ `ml_kg.turtle` (2.5MB) - Knowledge Graph em formato Turtle
+- ✅ `ml_kg.xml` (5.2MB) - Formato XML para compatibilidade
+- ✅ `ml_kg.json-ld` - JSON-LD para web semântica
+- ✅ `kg_construction_report.txt` - Relatório detalhado de estatísticas
+- ✅ **64.124 triplas RDF, 5.993 entidades, 3.056 relações**
 
-### Fase 3: Sistema RAG
+### Fase 3: Sistema RAG ⏳ PRÓXIMO
 - Implementação com LangChain + FAISS
 - Embeddings com sentence-transformers
 - Sistema de recuperação
+- **Status**: Pronto para iniciar após conclusão do KG ✅
 
 ### Fase 4: Experimentos Comparativos
 - Métricas de avaliação
@@ -102,16 +119,38 @@ Cl-project/
 
 ## 🔧 Dependências Principais
 
-- **PyPDF2**: Extração de PDFs (método principal)
-- **PyMuPDF**: Extração alternativa para PDFs problemáticos
-- **NLTK**: Tokenização de sentenças
-- **tqdm**: Barras de progresso
-- **pathlib**: Manipulação de caminhos
-- **logging**: Sistema de logs
+**Fase 1 & 2 (Concluídas):**
+- ✅ **PyPDF2**: Extração de PDFs (método principal)
+- ✅ **PyMuPDF**: Extração alternativa para PDFs problemáticos
+- ✅ **NLTK**: Tokenização de sentenças
+- ✅ **spaCy**: Named Entity Recognition (en_core_web_sm)
+- ✅ **RDFLib**: Construção e serialização do Knowledge Graph
+- ✅ **ollama**: Interface para LLM local (Llama 3.2 3B)
+- ✅ **tqdm**: Barras de progresso
+- ✅ **pathlib**: Manipulação de caminhos
+- ✅ **logging**: Sistema de logs
+
+**Próximas fases:**
+- **LangChain**: Framework RAG
+- **FAISS**: Busca vetorial
+- **sentence-transformers**: Embeddings
+
+## 📈 Status do Projeto
+
+### ✅ CONCLUÍDO:
+1. **Preprocessamento completo** (8 PDFs → 3.219 chunks)
+2. **Knowledge Graph completo** (64.124 triplas RDF)
+   - 5.993 entidades normalizadas
+   - 3.056 relações extraídas
+   - Múltiplos formatos de saída
+   - Ontologia ML/DL estruturada
+
+### ⏳ PRÓXIMO:
+3. **Sistema RAG** (Fase 3)
+4. **Experimentos comparativos** (Fase 4)
+5. **Análise híbrida KG+RAG** (Fase 5)
 
 ## 📚 Corpus de Dados
-
-**8 livros processados com sucesso** (Machine Learning e Deep Learning):
 1. ✅ Pattern Recognition and Machine Learning (Bishop) - 758 páginas
 2. ✅ Deep Learning (Goodfellow, Bengio, Courville) - 800 páginas  
 3. ❌ Pattern Classification (Duda, Hart, Stork) - **Removido** (PDF escaneado)

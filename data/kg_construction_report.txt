@@ -1,0 +1,166 @@
+
+🕸️ KNOWLEDGE GRAPH - RELATÓRIO FINAL
+==================================================
+
+📊 ESTATÍSTICAS GERAIS:
+   • Total de triplas RDF: 64,124
+   • Entidades adicionadas: 5,993
+   • Relações adicionadas: 3,056
+
+📚 DISTRIBUIÇÃO DE ENTIDADES:
+   • PERSON: 1,648
+   • CONCEPT: 1,535
+   • OTHER: 998
+   • ALGORITHM: 554
+   • METRIC: 387
+   • ORGANIZATION: 270
+   • SOFTWARE: 259
+   • EVENT: 67
+   • JOURNAL: 36
+   • PAPER: 24
+   • PUBLICATION: 15
+   • BOOK: 14
+   • LOCATION: 11
+   • CONFERENCE: 11
+   • MATIC: 9
+   • MATH_CONSTANT: 7
+   • TECHNIQUE: 5
+   • LANGUAGE: 5
+   • EXERCISE: 5
+   • FIELD: 4
+   • DATA: 3
+   • Software: 3
+   • THEOREM: 3
+   • DISTRIBUTION: 3
+   • VARIABLE: 3
+   • TESTING TOOL: 3
+   • MACHINE LEARNING TECHNIQUE: 3
+   • LAST NAME: 3
+   • CONFERENECE: 3
+   • PERIOD: 3
+   • METHODOLOGY: 3
+   • OPERATING_SYSTEM: 2
+   • PARAMETER: 2
+   • RESOURCE: 2
+   • MATRIX: 2
+   • TOPIC: 2
+   • DEPARTMENT: 2
+   • BOOK/RESOURCE: 2
+   • PUBLISHER: 2
+   • PROJECT OR LOCATION: 2
+   • JOURNAL TITLE: 2
+   • CURRENCY: 2
+   • MATHConcept: 2
+   • BULLETIN: 2
+   • GAME: 2
+   • CONVENTION: 2
+   • ROLE: 2
+   • TEXT_TYPE: 2
+   • UNITS: 2
+   • OPERATION: 2
+   • SOCIAL MEDIA PLATFORM: 1
+   • COMPANY: 1
+   • VERSION: 1
+   • EXAMPLE APPLICATION: 1
+   • DATASET: 1
+   • MATICHEAL CONCEPT: 1
+   • TIMEFRAME: 1
+   • HARDWARE: 1
+   • PERSON OR ORGANIZATION: 1
+   • DATA SOURCE: 1
+   • CHAPTER TITLE: 1
+   • MATH OPERATOR: 1
+   • CONCEPT/PUBLICATION RANGE: 1
+   • NETWORK: 1
+   • NETWORKS: 1
+   • OPTIMIZATION: 1
+   • CHALLENGE: 1
+   • SAMPLING: 1
+   • PROCESS: 1
+   • PROPERTY: 1
+   • ADDRESS: 1
+   • MATHEMATICAL NOTATION: 1
+   • MATRICE: 1
+   • NOTES: 1
+   • ACTION: 1
+   • INDEX: 1
+   • NUMBER: 1
+   • DOCUMENT: 1
+   • PAPER TITLE: 1
+   • EVENT OR LOCATION: 1
+   • ACTION WORD: 1
+   • MATH SYMBOL OR TERM: 1
+   • MATERIAL: 1
+   • EXCHANGE: 1
+   • REGION: 1
+   • DEVICE: 1
+   • DECAY: 1
+   • STATISTICS: 1
+   • SOFTWARE/ALGORITHM: 1
+   • UNIT: 1
+   • CONFERERENCE: 1
+   • ORGANIZATION EVENT: 1
+   • MEDIA: 1
+   • GEGRAPHIC REGION: 1
+   • DATA SET: 1
+   • CONVENTIONAL EVENT: 1
+   • RESEARCH_PAPER: 1
+   • ARTICLE: 1
+   • BOOK SERIES: 1
+   • SUBJECT: 1
+   • IDENTIFIER: 1
+   • ORGANISM: 1
+   • CHESS PIECE: 1
+   •  OTHER: 1
+   • DATA STRUCTURE: 1
+   • STATISTICAL CORRECTION: 1
+   • STATISTICAL MEASUREMENT: 1
+   • CONFERENCES: 1
+
+🔗 DISTRIBUIÇÃO DE RELAÇÕES:
+   • uses: 1,147
+   • is_a: 918
+   • applies_to: 274
+   • extends: 178
+   • implements: 118
+   • part_of: 73
+   • developed_by: 54
+   • optimizes: 41
+   • measures: 36
+   • proposed_by: 34
+
+🎯 NAMESPACES UTILIZADOS:
+   • brick: https://brickschema.org/schema/Brick#
+   • csvw: http://www.w3.org/ns/csvw#
+   • dc: http://purl.org/dc/elements/1.1/
+   • dcat: http://www.w3.org/ns/dcat#
+   • dcmitype: http://purl.org/dc/dcmitype/
+   • dcterms: http://purl.org/dc/terms/
+   • dcam: http://purl.org/dc/dcam/
+   • doap: http://usefulinc.com/ns/doap#
+   • foaf: http://xmlns.com/foaf/0.1/
+   • geo: http://www.opengis.net/ont/geosparql#
+   • odrl: http://www.w3.org/ns/odrl/2/
+   • org: http://www.w3.org/ns/org#
+   • prof: http://www.w3.org/ns/dx/prof/
+   • prov: http://www.w3.org/ns/prov#
+   • qb: http://purl.org/linked-data/cube#
+   • schema: https://schema.org/
+   • sh: http://www.w3.org/ns/shacl#
+   • skos: http://www.w3.org/2004/02/skos/core#
+   • sosa: http://www.w3.org/ns/sosa/
+   • ssn: http://www.w3.org/ns/ssn/
+   • time: http://www.w3.org/2006/time#
+   • vann: http://purl.org/vocab/vann/
+   • void: http://rdfs.org/ns/void#
+   • wgs: https://www.w3.org/2003/01/geo/wgs84_pos#
+   • owl: http://www.w3.org/2002/07/owl#
+   • rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+   • rdfs: http://www.w3.org/2000/01/rdf-schema#
+   • xsd: http://www.w3.org/2001/XMLSchema#
+   • xml: http://www.w3.org/XML/1998/namespace
+   • ml: http://ml-kg.org/ontology/
+   • entity: http://ml-kg.org/entity/
+   • relation: http://ml-kg.org/relation/
+
+✅ Knowledge Graph construído com sucesso!
