@@ -29,6 +29,13 @@ Cl-project/
 │   │   ├── entities.py         # Classes de entidades ✅
 │   │   ├── relations.py        # Classes de relações ✅
 │   │   └── execute_*.py        # Scripts de execução ✅
+│   ├── query_system/           # ✅ Sistema de Consultas KG (COMPLETO)
+│   │   ├── kg_executor.py      # Executor SPARQL ✅
+│   │   ├── query_processor.py  # Processador NL→SPARQL ✅
+│   │   ├── query_templates.py  # Templates SPARQL ✅
+│   │   ├── response_formatter.py # Formatador de respostas ✅
+│   │   ├── response_enhancer.py # Enhancement LLM ✅
+│   │   └── interactive_demo.py # Interface interativa ✅
 │   ├── rag/                    # ⏳ Módulo RAG (PRÓXIMO)
 │   └── experiments/            # Experimentos comparativos (Fase 4)
 ├── data/
@@ -102,29 +109,87 @@ Cl-project/
 - ✅ `kg_construction_report.txt` - Relatório detalhado de estatísticas
 - ✅ **64.124 triplas RDF, 5.993 entidades, 3.056 relações**
 
-### Fase 3: Sistema RAG ⏳ PRÓXIMO
+### Fase 3: Sistema de Consultas KG ✅ CONCLUÍDO
+**Sistema Inteligente de Consultas com Enhancement LLM**
+
+**🎯 Componentes do Sistema:**
+
+**1. ✅ KG Executor** 
+   - ✅ Carregamento e execução SPARQL no Knowledge Graph
+   - ✅ Otimização para 64K+ triplas
+   - ✅ Namespace management e estatísticas
+
+**2. ✅ Query Processor**
+   - ✅ Conversão linguagem natural → SPARQL
+   - ✅ 7 tipos de consultas suportadas:
+     - `what_is` - "O que é gradient descent?"
+     - `what_uses` - "Quais algoritmos usam backpropagation?"
+     - `who_created` - "Quem criou Support Vector Machine?"
+     - `list_by_type` - "Liste todos os algoritmos"
+     - `how_related` - "Como CNN está relacionado com deep learning?"
+     - `find_similar` - "Encontre conceitos similares a CNN"
+     - `is_type_of` - "Adam optimizer é um tipo de que?"
+
+**3. ✅ Query Templates**
+   - ✅ 7 templates SPARQL otimizados
+   - ✅ Sintaxe UNION corrigida
+   - ✅ Estrutura flexível para diferentes tipos de consultas
+
+**4. ✅ Response Formatter**
+   - ✅ Formatação estruturada dos resultados SPARQL
+   - ✅ Cálculo de confiança baseado em resultados
+   - ✅ Limpeza de URIs e metadados
+
+**5. ✅ Response Enhancer (LLM)**
+   - ✅ **Enhancement com Ollama (llama3.2:3b)**
+   - ✅ Conversão de respostas estruturadas → **respostas naturais conversacionais**
+   - ✅ Prompts contextualizados por tipo de consulta
+   - ✅ Fallback automático se LLM falhar
+   - ✅ Medição de tempo de processamento LLM
+
+**6. ✅ Interactive Demo**
+   - ✅ Interface CLI completa e intuitiva
+   - ✅ Modo interativo + demonstração
+   - ✅ Toggle `natural on/off` - liga/desliga LLM
+   - ✅ Toggle `debug on/off` - modo debug detalhado
+   - ✅ Comandos `help`, `stats`, `quit`
+   - ✅ Métricas em tempo real (tempo total + LLM)
+
+**🚀 Como usar o Sistema:**
+```bash
+cd /home/beventura/UC/cl-project
+source venv/bin/activate
+python src/query_system/interactive_demo.py
+```
+
+**Exemplos de consultas testadas:**
+- ✅ "O que é gradient descent?" → Resposta natural completa (9.49s, 90% confiança)
+- ✅ "Quais algoritmos usam backpropagation?" → Lista contextualizada
+- ✅ "Liste todos os algoritmos" → Lista organizada e categorizada
+- ✅ "Como neural network está relacionado com deep learning?" → Análise de relações
+
+### Fase 4: Sistema RAG ⏳ PRÓXIMO
 - Implementação com LangChain + FAISS
 - Embeddings com sentence-transformers
 - Sistema de recuperação
-- **Status**: Pronto para iniciar após conclusão do KG ✅
+- **Status**: Pronto para iniciar após Sistema de Consultas KG ✅
 
-### Fase 4: Experimentos Comparativos
-- Métricas de avaliação
+### Fase 5: Experimentos Comparativos
+- Métricas de avaliação KG vs RAG
 - Testes de perguntas e respostas
-- Análise comparativa
+- Análise comparativa detalhada
 
-### Fase 5: Análise Híbrida
+### Fase 6: Análise Híbrida
 - Combinação de KG + RAG
-- Otimizações
+- Otimizações e melhorias
 
 ## 🔧 Dependências Principais
 
-**Fase 1 & 2 (Concluídas):**
-- ✅ **PyPDF2**: Extração de PDFs (método principal)
-- ✅ **PyMuPDF**: Extração alternativa para PDFs problemáticos
+**Fases 1, 2 & 3 (Concluídas):**
+- ✅ **PyPDF2 & PyMuPDF**: Extração de PDFs
 - ✅ **NLTK**: Tokenização de sentenças
 - ✅ **spaCy**: Named Entity Recognition (en_core_web_sm)
-- ✅ **RDFLib**: Construção e serialização do Knowledge Graph
+- ✅ **RDFLib**: Construção e SPARQL no Knowledge Graph
 - ✅ **ollama**: Interface para LLM local (Llama 3.2 3B)
 - ✅ **tqdm**: Barras de progresso
 - ✅ **pathlib**: Manipulação de caminhos
@@ -144,11 +209,16 @@ Cl-project/
    - 3.056 relações extraídas
    - Múltiplos formatos de saída
    - Ontologia ML/DL estruturada
+3. **Sistema de Consultas KG completo** com Enhancement LLM
+   - 7 tipos de consultas suportadas
+   - Interface interativa com modo natural/estruturado
+   - Integração Ollama para respostas conversacionais
+   - Sistema robusto com fallbacks e debug
 
 ### ⏳ PRÓXIMO:
-3. **Sistema RAG** (Fase 3)
-4. **Experimentos comparativos** (Fase 4)
-5. **Análise híbrida KG+RAG** (Fase 5)
+4. **Sistema RAG** (Fase 4)
+5. **Experimentos comparativos KG vs RAG** (Fase 5)
+6. **Análise híbrida KG+RAG** (Fase 6)
 
 ## 📚 Corpus de Dados
 1. ✅ Pattern Recognition and Machine Learning (Bishop) - 758 páginas
