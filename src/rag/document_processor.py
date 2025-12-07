@@ -69,23 +69,23 @@ class DocumentProcessor:
         self.model = None
         self.processed_docs: List[ProcessedDocument] = []
         
-        logger.info(f"📚 DocumentProcessor inicializado com modelo: {model_name}")
+        # DocumentProcessor inicializado
     
     def _load_model(self):
         """Carrega o modelo de embeddings (lazy loading)."""
         if self.model is None:
-            logger.info(f"🤖 Carregando modelo de embeddings: {self.model_name}")
+            # Carregando modelo de embeddings
             self.model = SentenceTransformer(self.model_name)
-            logger.info("✅ Modelo carregado com sucesso")
+            # Modelo carregado
     
     def load_chunks(self) -> List[TextChunk]:
         """Carrega chunks usando o mesmo sistema do KG."""
-        logger.info("📂 Carregando chunks de texto...")
+        # Carregando chunks de texto
         
         chunk_loader = ChunkLoader()
         chunks = chunk_loader.load_all_chunks()
         
-        logger.info(f"✅ {len(chunks)} chunks carregados")
+        # Chunks carregados silenciosamente
         return chunks
     
     def process_chunks(self, chunks: List[TextChunk]) -> List[ProcessedDocument]:
@@ -106,7 +106,7 @@ class DocumentProcessor:
         texts = [chunk.content for chunk in chunks]
         
         # Gerar embeddings em batch (mais eficiente)
-        logger.info("🤖 Gerando embeddings...")
+        # Gerar embeddings
         embeddings = self.model.encode(
             texts, 
             batch_size=32,
@@ -128,7 +128,7 @@ class DocumentProcessor:
             processed_docs.append(processed_doc)
         
         self.processed_docs = processed_docs
-        logger.info(f"✅ {len(processed_docs)} documentos processados")
+        # Processamento concluído
         
         return processed_docs
     
@@ -183,8 +183,8 @@ class DocumentProcessor:
         self.model_name = data['model_name']
         self.processed_docs = processed_docs
         
-        logger.info(f"📂 {len(processed_docs)} documentos carregados de: {filepath}")
-        logger.info(f"🤖 Modelo usado: {self.model_name}")
+        # Documentos carregados silenciosamente
+        # Informações do processamento salvas
         logger.info(f"📏 Dimensão dos embeddings: {data['embedding_dim']}")
         
         return processed_docs

@@ -94,11 +94,11 @@ class RAGPipeline:
         self.is_initialized = False
         self.query_history: List[Dict[str, Any]] = []
         
-        logger.info(f"🚀 RAGPipeline criado:")
-        logger.info(f"   Vector Store: {self.config.vector_store_path}")
-        logger.info(f"   Modelo LLM: {self.config.model_name}")
-        logger.info(f"   Top-K: {self.config.top_k}")
-        logger.info(f"   Estilo: {self.config.response_style}")
+        # logger.info(f"   RAGPipeline criado:")
+        # logger.info(f"   Vector Store: {self.config.vector_store_path}")
+        # logger.info(f"   Modelo LLM: {self.config.model_name}")
+        # logger.info(f"   Top-K: {self.config.top_k}")
+        # logger.info(f"   Estilo: {self.config.response_style}")
     
     def initialize(self):
         """Inicializa todos os componentes do pipeline."""
@@ -106,7 +106,7 @@ class RAGPipeline:
             return
         
         start_time = time.time()
-        logger.info("🔄 Inicializando pipeline RAG...")
+        print("🔄 Inicializando pipeline RAG...")
         
         # Configurar retriever
         retrieval_config = RetrievalConfig(
@@ -142,7 +142,7 @@ class RAGPipeline:
         self.is_initialized = True
         init_time = time.time() - start_time
         
-        logger.info(f"✅ Pipeline inicializado em {init_time:.2f}s")
+        print(f"✅ Pipeline inicializado em {init_time:.1f}s")
     
     def query(self, question: str) -> RAGResponse:
         """
@@ -158,26 +158,26 @@ class RAGPipeline:
             self.initialize()
         
         start_time = time.time()
-        logger.info(f"❓ Processando consulta: '{question}'")
+        # Processando consulta
         
         try:
             # 1. RECUPERAÇÃO
-            logger.info("🔍 Fase 1: Recuperação de documentos")
+            # Fase 1: Recuperação de documentos
             retrieval_start = time.time()
             
             retrieval_result = self.retriever.retrieve(question)
             
             retrieval_time = time.time() - retrieval_start
-            logger.info(f"✅ Recuperação: {len(retrieval_result.documents)} docs em {retrieval_time:.3f}s")
+            # Recuperação concluída
             
             # 2. GERAÇÃO
-            logger.info("🤖 Fase 2: Geração de resposta")
+            # Fase 2: Geração de resposta
             generation_start = time.time()
             
             generation_result = self.generator.generate_response(retrieval_result)
             
             generation_time = time.time() - generation_start
-            logger.info(f"✅ Geração: resposta em {generation_time:.3f}s")
+            # Geração concluída
             
             # 3. CONSOLIDAÇÃO
             total_time = time.time() - start_time
@@ -226,7 +226,7 @@ class RAGPipeline:
                     }
                 })
             
-            logger.info(f"🎉 Consulta processada: {total_time:.2f}s total, confiança {response.confidence_score:.2f}")
+            # Consulta processada
             
             return response
             
@@ -259,15 +259,15 @@ class RAGPipeline:
         Returns:
             Lista de respostas
         """
-        logger.info(f"📊 Processando {len(questions)} consultas em lote...")
+        # Processando consultas em lote
         
         results = []
         for i, question in enumerate(questions, 1):
-            logger.info(f"🔄 Processando {i}/{len(questions)}")
+            # Processando consulta
             response = self.query(question)
             results.append(response)
         
-        logger.info(f"✅ Lote processado: {len(results)} respostas")
+        # Lote processado
         return results
     
     def get_statistics(self) -> Dict[str, Any]:
@@ -292,7 +292,7 @@ class RAGPipeline:
     def clear_history(self):
         """Limpa histórico de consultas."""
         self.query_history.clear()
-        logger.info("🗑️ Histórico de consultas limpo")
+        # Histórico de consultas limpo
     
     def save_history_to_file(self, filepath: str):
         """Salva histórico em arquivo."""
@@ -303,7 +303,7 @@ class RAGPipeline:
         with open(filepath, 'w', encoding='utf-8') as f:
             json.dump(self.query_history, f, indent=2, default=str)
         
-        logger.info(f"💾 Histórico salvo: {filepath} ({len(self.query_history)} consultas)")
+        # Histórico salvo
     
     def load_history_from_file(self, filepath: str):
         """Carrega histórico de arquivo."""
@@ -311,7 +311,7 @@ class RAGPipeline:
             with open(filepath, 'r', encoding='utf-8') as f:
                 self.query_history = json.load(f)
             
-            logger.info(f"📂 Histórico carregado: {filepath} ({len(self.query_history)} consultas)")
+            # Histórico carregado
         except Exception as e:
             logger.error(f"❌ Erro carregando histórico: {e}")
 

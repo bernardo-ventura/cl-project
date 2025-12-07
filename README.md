@@ -43,6 +43,8 @@ Cl-project/
    │   ├── retriever.py        # Recuperação inteligente ✅
    │   ├── response_generator.py # LLM Response Generation ✅
    │   └── rag_pipeline.py     # Pipeline completo ✅
+├── simple_rag.py             # Interface principal simplificada ✅
+├── process_rag_documents.py  # Processamento inicial ✅
 │   └── experiments/            # Experimentos comparativos (Fase 4)
 ├── data/
 │   ├── raw_pdfs/              # 8 PDFs originais
@@ -120,46 +122,7 @@ Cl-project/
 
 **🎯 Componentes do Sistema:**
 
-**1. ✅ KG Executor** 
-   - ✅ Carregamento e execução SPARQL no Knowledge Graph
-   - ✅ Otimização para 64K+ triplas
-   - ✅ Namespace management e estatísticas
-
-**2. ✅ Query Processor**
-   - ✅ Conversão linguagem natural → SPARQL
-   - ✅ 7 tipos de consultas suportadas:
-     - `what_is` - "O que é gradient descent?"
-     - `what_uses` - "Quais algoritmos usam backpropagation?"
-     - `who_created` - "Quem criou Support Vector Machine?"
-     - `list_by_type` - "Liste todos os algoritmos"
-     - `how_related` - "Como CNN está relacionado com deep learning?"
-     - `find_similar` - "Encontre conceitos similares a CNN"
-     - `is_type_of` - "Adam optimizer é um tipo de que?"
-
-**3. ✅ Query Templates**
-   - ✅ 7 templates SPARQL otimizados
-   - ✅ Sintaxe UNION corrigida
-   - ✅ Estrutura flexível para diferentes tipos de consultas
-
-**4. ✅ Response Formatter**
-   - ✅ Formatação estruturada dos resultados SPARQL
-   - ✅ Cálculo de confiança baseado em resultados
-   - ✅ Limpeza de URIs e metadados
-
-**5. ✅ Response Enhancer (LLM)**
-   - ✅ **Enhancement com Ollama (llama3.2:3b)**
-   - ✅ Conversão de respostas estruturadas → **respostas naturais conversacionais**
-   - ✅ Prompts contextualizados por tipo de consulta
-   - ✅ Fallback automático se LLM falhar
-   - ✅ Medição de tempo de processamento LLM
-
-**6. ✅ Interactive Demo**
-   - ✅ Interface CLI completa e intuitiva
-   - ✅ Modo interativo + demonstração
-   - ✅ Toggle `natural on/off` - liga/desliga LLM
-   - ✅ Toggle `debug on/off` - modo debug detalhado
-   - ✅ Comandos `help`, `stats`, `quit`
-   - ✅ Métricas em tempo real (tempo total + LLM)
+    
 
 **🚀 Como usar o Sistema:**
 ```bash
@@ -215,12 +178,13 @@ python src/query_system/interactive_demo.py
    - ✅ Error handling robusto com fallbacks
    - ✅ Histórico de consultas e persistência
 
-**✅ Fase 6: Interface Interativa (CONCLUÍDA)**
-   - ✅ Demo CLI completa similar ao sistema KG
-   - ✅ Comandos especiais (help, stats, config, debug, demo)
-   - ✅ Configuração dinâmica (style, top-k, debug mode)
-   - ✅ Demonstração automática com consultas pré-definidas
-   - ✅ Métricas em tempo real
+**✅ Fase 6: Interface Simplificada (CONCLUÍDA)**
+   - ✅ Interface direta de pergunta e resposta sem comandos complexos
+   - ✅ Sistema limpo focado exclusivamente em consultas
+   - ✅ Respostas em linguagem natural com métricas
+   - ✅ Loop contínuo de perguntas até o usuário sair
+   - ✅ Inicialização automática do sistema completo
+   - ✅ Limpeza de arquivos desnecessários (demos removidos)
 
 **🎯 Arquitetura Final:**
 ```
@@ -232,16 +196,29 @@ Query → Document Processor (Embeddings) → Vector Store (FAISS) → Retriever
 cd /home/beventura/UC/cl-project
 source venv/bin/activate
 
-# Interface interativa completa
-python demo_rag_interactive.py
+# Interface simplificada de perguntas e respostas
+python3 simple_rag.py
+```
 
-# Teste rápido do sistema
-python test_rag_complete.py
+**💬 Exemplo de uso:**
+```
+🤖 SISTEMA RAG - MACHINE LEARNING & DEEP LEARNING
+📚 Base de conhecimento: 3,219 chunks de 8 livros de ML/DL
+🔍 Vector Store: FAISS com embeddings all-MiniLM-L6-v2
+🤖 LLM: Ollama (llama3.2:3b)
 
-# Testes individuais dos componentes
-python src/rag/retriever.py
-python src/rag/response_generator.py
-python src/rag/rag_pipeline.py
+❓ Faça sua pergunta sobre ML/DL: O que é machine learning?
+
+🤖 RESPOSTA:
+============================================================
+Machine learning é uma área da inteligência artificial que
+permite aos computadores aprenderem e melhorarem seu
+desempenho em tarefas específicas através da experiência...
+============================================================
+
+📊 Confiança: 0.89 | ⏱️ Tempo: 8.2s | 📄 Documentos: 5
+
+❓ Faça sua pergunta sobre ML/DL: [Digite 'sair' para terminar]
 ```
 
 **📊 Performance Observada:**
@@ -251,15 +228,6 @@ python src/rag/rag_pipeline.py
    - Confiança média: 0.8-0.9 em consultas técnicas
    - GPU acceleration: ✅ (CUDA para embeddings)
 
-**📁 Arquivos Criados:**
-   - src/rag/__init__.py - Módulo RAG
-   - src/rag/document_processor.py - Geração de embeddings ✅
-   - src/rag/vector_store.py - FAISS Vector Store ✅
-   - src/rag/retriever.py - Recuperação inteligente ✅
-   - src/rag/response_generator.py - Geração com LLM ✅
-   - src/rag/rag_pipeline.py - Pipeline completo ✅
-   - demo_rag_interactive.py - Interface interativa ✅
-   - test_rag_complete.py - Teste do sistema ✅
 
 **🔍 Exemplos de Consultas Testadas:**
    - "What is machine learning?" → Definições introdutórias
@@ -308,18 +276,59 @@ python src/rag/rag_pipeline.py
    - Interface interativa com modo natural/estruturado
    - Integração Ollama para respostas conversacionais
    - Sistema robusto com fallbacks e debug
-4. **Sistema RAG completo** (Pipeline end-to-end)
+4. **Sistema RAG completo** (Pipeline end-to-end com interface simplificada)
    - Document Processing: 3.219 docs com embeddings (all-MiniLM-L6-v2)
    - Vector Store: FAISS IndexFlatIP para busca sub-milissegundo
    - Retriever: Recuperação inteligente com re-ranking
    - Response Generator: Integração Ollama LLM com prompt engineering
    - Pipeline: Orquestração completa com métricas e configurações
-   - Interface: Demo interativa com comandos e demonstrações
+   - Interface: Sistema limpo de perguntas e respostas direto
 
-### ⏳ PRÓXIMO:
-5. **Experimentos comparativos KG vs RAG** (Fase final)
-6. **Análise híbrida KG+RAG** (Fase final)
-7. **Relatório final e conclusões** (Documentação)
+### 🔄 EM ANDAMENTO:
+5. **Reconstrução do Sistema de Consultas KG** 
+   - ✅ **Passo 1 - Entity Extraction**: Extração de entidades com spaCy (CONCLUÍDO)
+     - Reutiliza padrões ML/DL do sistema KG existente
+     - Prioriza entidades compostas sobre tokens individuais
+     - Filtra ruído e palavras irrelevantes
+     - Taxa de sucesso: ~95% em 34 testes de perguntas variadas
+   - ⏳ **Passo 2 - Entity Linking**: Mapeamento para entidades canônicas do KG
+     - Usar embeddings para encontrar entidades similares no KG
+     - Mapear candidatos para URIs corretos (ex: "cnn" → ml:ConvolutionalNeuralNetwork)
+   - 📋 **Passo 3 - Intent Classification**: Classificação de intenção com LLM
+     - Identificar tipo de pergunta (definição, comparação, listagem, explicação)
+     - Usar Ollama LLM para classificação robusta
+   - 📋 **Passo 4 - Predicate Selection**: Seleção de predicados SPARQL
+     - Mapear intent + entidades para relações do KG
+     - Selecionar predicados apropriados (rdfs:label, ml:uses, ml:implements, etc.)
+   - 📋 **Passo 5 - SPARQL Generation**: Construção de consultas SPARQL
+     - Templates baseados em intent e predicados
+     - Construção automática de consultas estruturadas
+   - 📋 **Passo 6 - SPARQL Execution**: Execução no KG
+     - Usar executor SPARQL existente
+     - Tratar resultados vazios e erros
+   - 📋 **Passo 7 - Natural Language Answer**: Resposta em linguagem natural
+     - Converter resultados SPARQL em respostas naturais
+     - Usar Ollama LLM para geração de texto
+
+**Pipeline Completo Planejado:**
+```
+Pergunta → [1] Entity Extraction → [2] Entity Linking → [3] Intent Classification → 
+[4] Predicate Selection → [5] SPARQL Generation → [6] SPARQL Execution → 
+[7] Natural Language Answer → Resposta Final
+```
+
+### ⏳ PRÓXIMOS PASSOS:
+6. **Experimentos Comparativos KG vs RAG**
+   - Definir conjunto padrão de 20-30 perguntas de ML/DL
+   - Executar testes em ambos os sistemas
+   - Métricas: relevância, precisão, tempo de resposta, cobertura
+   - Análise qualitativa das diferenças nas respostas
+7. **Sistema Híbrido KG+RAG**
+   - Combinação inteligente dos dois paradigmas
+   - KG para estrutura e RAG para contexto detalhado
+8. **Relatório Final e Conclusões**
+   - Análise comparativa completa
+   - Recomendações de uso para cada abordagem
 
 ## 📚 Corpus de Dados
 1. ✅ Pattern Recognition and Machine Learning (Bishop) - 758 páginas

@@ -68,10 +68,7 @@ class RAGResponseGenerator:
         self.ollama_available = False
         self.is_initialized = False
         
-        logger.info(f"🤖 RAGResponseGenerator criado:")
-        logger.info(f"   Modelo: {self.config.model_name}")
-        logger.info(f"   Estilo: {self.config.response_style}")
-        logger.info(f"   Temperatura: {self.config.temperature}")
+        # RAGResponseGenerator criado
     
     def initialize(self):
         """Inicializa e verifica conexão com Ollama."""
@@ -86,14 +83,14 @@ class RAGResponseGenerator:
             available_models = [model.model for model in response.models]
             if self.config.model_name in available_models:
                 self.ollama_available = True
-                logger.info(f"✅ Ollama conectado, modelo {self.config.model_name} disponível")
+                # Ollama conectado
             else:
                 logger.warning(f"⚠️ Modelo {self.config.model_name} não encontrado")
-                logger.info(f"📋 Modelos disponíveis: {available_models}")
+                # Modelos disponíveis verificados
                 if available_models:
                     self.config.model_name = available_models[0]
                     self.ollama_available = True
-                    logger.info(f"🔄 Usando modelo: {self.config.model_name}")
+                    # Usando modelo configurado
                 else:
                     self.ollama_available = False
                 
@@ -282,7 +279,7 @@ RESPOSTA:"""
         
         start_time = time.time()
         
-        logger.info(f"🤖 Gerando resposta para: '{retrieval_result.query}'")
+        # Gerando resposta
         
         # Verificar se há documentos
         if not retrieval_result.documents:
@@ -297,13 +294,13 @@ RESPOSTA:"""
         try:
             # Construir contexto
             context = self._build_context(retrieval_result.documents)
-            logger.info(f"📄 Contexto construído: {len(context)} caracteres")
+            # Contexto construído
             
             # Construir prompt
             prompt = self._build_prompt(retrieval_result.query, context)
             
             # Chamar LLM
-            logger.info(f"🔄 Chamando {self.config.model_name}...")
+            # Chamando LLM
             response = ollama.generate(
                 model=self.config.model_name,
                 prompt=prompt,
@@ -320,8 +317,7 @@ RESPOSTA:"""
             confidence = self._calculate_confidence(answer_text, retrieval_result.documents)
             sources = self._extract_sources(answer_text, retrieval_result.documents)
             
-            logger.info(f"✅ Resposta gerada em {generation_time:.2f}s")
-            logger.info(f"📊 Confiança: {confidence:.2f}")
+            # Resposta gerada
             
             return GeneratedResponse(
                 query=retrieval_result.query,

@@ -52,7 +52,7 @@ class VectorStore:
         self.documents: List[ProcessedDocument] = []
         self.is_trained = False
         
-        logger.info(f"🔍 VectorStore inicializado com dimensão: {embedding_dimension}")
+        # Vector store inicializado silenciosamente
     
     def _create_index(self) -> faiss.Index:
         """
@@ -65,7 +65,7 @@ class VectorStore:
         # Ideal para datasets pequenos-médios (< 100K), busca exata
         index = faiss.IndexFlatIP(self.embedding_dimension)
         
-        logger.info(f"📊 Criado IndexFlatIP com {self.embedding_dimension} dimensões")
+        # Índice FAISS criado
         return index
     
     def add_documents(self, documents: List[ProcessedDocument]):
@@ -77,8 +77,6 @@ class VectorStore:
         """
         if not documents:
             raise ValueError("Lista de documentos vazia")
-        
-        logger.info(f"📥 Adicionando {len(documents)} documentos ao vector store...")
         
         # Criar índice se não existir
         if self.index is None:
@@ -94,9 +92,6 @@ class VectorStore:
         self.documents.extend(documents)
         
         self.is_trained = True
-        
-        logger.info(f"✅ {len(documents)} documentos adicionados")
-        logger.info(f"📊 Total no index: {self.index.ntotal} documentos")
     
     def search(self, query_embedding: np.ndarray, top_k: int = 5) -> List[SearchResult]:
         """
@@ -137,7 +132,7 @@ class VectorStore:
                 )
                 results.append(result)
         
-        logger.info(f"🔍 Busca concluída: {len(results)} resultados em {search_time*1000:.1f}ms")
+        # Busca concluída silenciosamente
         
         return results
     
@@ -212,9 +207,7 @@ class VectorStore:
         faiss_size = faiss_path.stat().st_size / (1024 * 1024)  # MB
         metadata_size = metadata_path.stat().st_size / (1024 * 1024)  # MB
         
-        logger.info(f"💾 Vector store salvo:")
-        logger.info(f"   📄 Índice FAISS: {faiss_path} ({faiss_size:.1f} MB)")
-        logger.info(f"   📋 Metadados: {metadata_path} ({metadata_size:.1f} MB)")
+        # Vector store salvo silenciosamente
     
     def load(self, filepath: str):
         """
@@ -248,10 +241,7 @@ class VectorStore:
         self.embedding_dimension = metadata['embedding_dimension']
         self.is_trained = metadata['is_trained']
         
-        logger.info(f"📂 Vector store carregado:")
-        logger.info(f"   📊 {len(self.documents)} documentos")
-        logger.info(f"   📏 Dimensão: {self.embedding_dimension}")
-        logger.info(f"   🔍 Tipo índice: {type(self.index).__name__}")
+        # Vector store carregado silenciosamente
 
 
 def create_vector_store(embedding_dimension: int = 384) -> VectorStore:
@@ -277,7 +267,7 @@ if __name__ == "__main__":
         vector_store = create_vector_store()
         
         # Carregar documentos processados
-        print("📂 Carregando documentos processados...")
+        print("Carregando documentos processados...")
         processor = create_document_processor()
         documents = processor.load_processed_docs("data/rag_processed_documents.pkl")
         
@@ -301,14 +291,14 @@ if __name__ == "__main__":
         test_query_embedding = documents[0].embedding
         results = vector_store.search(test_query_embedding, top_k=3)
         
-        print(f"📋 Resultados da busca teste:")
-        for result in results:
-            print(f"   {result.rank}. {result.document.chunk_id} "
-                  f"(score: {result.similarity_score:.3f})")
-            print(f"      {result.document.content[:100]}...")
+        # print(f"📋 Resultados da busca teste:")
+        # for result in results:
+        #     print(f"   {result.rank}. {result.document.chunk_id} "
+        #           f"(score: {result.similarity_score:.3f})")
+        #     print(f"      {result.document.content[:100]}...")
         
         # Salvar vector store
-        print(f"\n💾 Salvando vector store...")
+        # print(f"\n💾 Salvando vector store...")
         vector_store.save("data/test_vector_store")
         
         # Testar carregamento

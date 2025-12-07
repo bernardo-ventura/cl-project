@@ -175,22 +175,28 @@ $RECYCLE.BIN/
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
-# Model files (se você não quiser versionar modelos treinados)
-*.pkl
-*.pickle
+# Model files (large trained models - but allow essential project files)
 *.h5
 *.hdf5
 *.joblib
 
-# Data files (uncomment if you don't want to version large datasets)
-# data/raw_pdfs/
-# data/processed_texts/*.txt
+# Allow essential project data files
+!data/extracted_entities.pkl
+!data/extracted_relations.pkl
+!data/normalized_entities.pkl
+!data/rag_vector_store.pkl
+!data/rag_processed_documents.pkl
+!data/processed_chunks.pkl
 
-# Specific to your project - large data files
-# Keep processed texts and chunks but ignore raw PDFs
+# Ignore other pickle files that aren't essential
+data/*sample*.pkl
+data/*backup*.pkl
+
+# Data files - keep essential files for project functionality
+# Raw PDFs are large and not needed for deployment
 data/raw_pdfs/*.pdf
 data/samples/
 
-# Ignore large original text files but keep chunks
+# Keep processed text chunks but ignore original large text files
 data/processed_texts/*.txt
 !data/processed_texts/chunks/

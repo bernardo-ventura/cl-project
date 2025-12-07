@@ -90,10 +90,10 @@ class RAGRetriever:
         self.document_processor = None
         self.is_initialized = False
         
-        logger.info(f"🔍 RAGRetriever criado com configurações:")
-        logger.info(f"   Top-K: {self.config.top_k}")
-        logger.info(f"   Threshold: {self.config.similarity_threshold}")
-        logger.info(f"   Re-ranking: {self.config.enable_reranking}")
+        # logger.info(f"   RAGRetriever criado com configurações:")
+        # logger.info(f"   Top-K: {self.config.top_k}")
+        # logger.info(f"   Threshold: {self.config.similarity_threshold}")
+        # logger.info(f"   Re-ranking: {self.config.enable_reranking}")
     
     def initialize(self):
         """Inicializa componentes (lazy loading)."""
@@ -103,19 +103,19 @@ class RAGRetriever:
         start_time = time.time()
         
         # Carregar vector store
-        logger.info("📂 Carregando Vector Store...")
+        # logger.info("📂 Carregando Vector Store...")
         self.vector_store = create_vector_store()
         self.vector_store.load(self.vector_store_path)
         
         # Carregar document processor para encoding de queries
-        logger.info("🤖 Inicializando Document Processor...")
+        # logger.info("🤖 Inicializando Document Processor...")
         self.document_processor = create_document_processor()
         self.document_processor._load_model()
         
         self.is_initialized = True
         init_time = time.time() - start_time
         
-        logger.info(f"✅ RAGRetriever inicializado em {init_time:.2f}s")
+        # RAGRetriever inicializado
     
     def _analyze_query(self, query: str) -> Dict[str, Any]:
         """
@@ -336,11 +336,11 @@ class RAGRetriever:
         start_time = time.time()
         config = custom_config or self.config
         
-        logger.info(f"🔍 Recuperando documentos para: '{query}'")
+        # Recuperando documentos
         
         # 1. Analisar consulta
         query_analysis = self._analyze_query(query)
-        logger.info(f"📊 Tipo da consulta: {query_analysis['query_type']}")
+        # Análise da consulta concluída
         
         # 2. Buscar no vector store
         search_results = self.vector_store.search_by_text(
@@ -355,12 +355,12 @@ class RAGRetriever:
             if result.similarity_score >= config.similarity_threshold
         ]
         
-        logger.info(f"📋 {len(search_results)} → {len(filtered_results)} após threshold")
+        # Filtros aplicados
         
         # 4. Re-ranking inteligente
         if config.enable_reranking:
             filtered_results = self._rerank_results(filtered_results, query_analysis)
-            logger.info("🔄 Re-ranking aplicado")
+            # Re-ranking aplicado
         
         # 5. Limitar ao top-k final
         final_results = filtered_results[:config.top_k]
@@ -370,7 +370,7 @@ class RAGRetriever:
         
         processing_time = time.time() - start_time
         
-        logger.info(f"✅ Recuperação concluída: {len(retrieved_docs)} docs em {processing_time*1000:.1f}ms")
+        # Recuperação concluída
         
         return RetrievalResult(
             query=query,
