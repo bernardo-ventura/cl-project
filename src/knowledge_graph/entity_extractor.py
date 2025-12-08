@@ -29,7 +29,6 @@ class EntityCandidate:
     end_char: int
     chunk_id: str
     source: str  # 'spacy_ner' ou 'custom_pattern'
-    confidence: float = 1.0
 
 class EntityExtractor:
     """Extrator de entidades para domínio ML/DL."""
@@ -195,8 +194,7 @@ class EntityExtractor:
                     start_char=ent.start_char,
                     end_char=ent.end_char,
                     chunk_id=chunk_id,
-                    source='spacy_ner',
-                    confidence=1.0  # spaCy não fornece confidence score facilmente
+                    source='spacy_ner'
                 )
                 entities.append(entity)
         
@@ -218,8 +216,7 @@ class EntityExtractor:
                 start_char=span.start_char,
                 end_char=span.end_char,
                 chunk_id=chunk_id,
-                source='custom_pattern',
-                confidence=1.0
+                source='custom_pattern'
             )
             entities.append(entity)
         

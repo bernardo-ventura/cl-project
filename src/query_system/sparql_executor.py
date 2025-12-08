@@ -19,7 +19,7 @@ from .sparql_generator import SPARQLGenerationResult
 import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
-from new_query.kg_executor import create_kg_executor
+from query_system.kg_executor import create_kg_executor
 
 logger = logging.getLogger(__name__)
 

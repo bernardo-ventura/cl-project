@@ -29,7 +29,6 @@ class Relation:
     predicate: str
     object: str
     chunk_id: str
-    confidence: float
     context: str  # Frase/contexto onde a relação foi encontrada
 
 class RelationExtractor:
@@ -327,7 +326,6 @@ Important:
                     predicate=rel_data['predicate'],
                     object=rel_data['object'],
                     chunk_id=chunk.chunk_id,
-                    confidence=1.0,  # Simplificado
                     context=rel_data['context']
                 )
                 relations.append(relation)

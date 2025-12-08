@@ -29,7 +29,6 @@ class NormalizedEntity:
     entity_type: str
     aliases: List[str]
     frequency: int
-    confidence: float
     source_chunks: List[str]
     original_labels: List[str]
 
@@ -278,7 +277,6 @@ Important: Only return valid JSON. Be conservative - if unsure about an entity, 
                             entity_type=entity_type,
                             aliases=aliases,
                             frequency=total_freq,
-                            confidence=1.0,  # Simplificado por agora
                             source_chunks=source_chunks,
                             original_labels=original_labels
                         )

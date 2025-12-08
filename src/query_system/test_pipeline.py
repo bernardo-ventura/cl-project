@@ -5,7 +5,7 @@ Arquivo separado para testar o pipeline sem interferir na interface interativa.
 Use este arquivo quando quiser validar funcionalidades ou fazer debugging.
 """
 
-from .complete_pipeline import create_complete_pipeline
+from .interactive_kg import create_complete_pipeline
 
 
 def test_pipeline_basic():

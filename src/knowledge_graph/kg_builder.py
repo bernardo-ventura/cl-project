@@ -196,7 +196,6 @@ class KnowledgeGraphBuilder:
                 
                 # Metadados
                 self.graph.add((entity_uri, self.ML.frequency, Literal(entity_data.frequency, datatype=XSD.integer)))
-                self.graph.add((entity_uri, self.ML.confidence, Literal(entity_data.confidence, datatype=XSD.float)))
                 
                 # Source chunks (proveniência)
                 for chunk_id in entity_data.source_chunks[:5]:  # Limitar para não sobrecarregar
@@ -238,7 +237,6 @@ class KnowledgeGraphBuilder:
                 self.graph.add((relation_instance_uri, self.ML.object, object_uri))
                 self.graph.add((relation_instance_uri, self.ML.context, Literal(relation.context)))
                 self.graph.add((relation_instance_uri, self.ML.sourceChunk, Literal(relation.chunk_id)))
-                self.graph.add((relation_instance_uri, self.ML.confidence, Literal(relation.confidence, datatype=XSD.float)))
                 
                 self.stats['relations_added'] += 1
                 self.stats['relation_types'][relation.predicate] = self.stats['relation_types'].get(relation.predicate, 0) + 1
